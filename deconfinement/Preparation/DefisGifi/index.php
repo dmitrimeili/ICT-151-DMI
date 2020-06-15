@@ -16,6 +16,7 @@ if (isset($_POST["store"])) {
         ]);
 }
 
+// Lire les données dont la vue aura besoin pour créer le formulaire
 $students = selectMany("Select * from person where role=0", []);
 $evals = selectMany("Select testDescription, moduleShortName from evaluation 
 	inner join moduleinstance on fkModuleInstance = idModuleInstance 
@@ -42,5 +43,18 @@ $evals = selectMany("Select testDescription, moduleShortName from evaluation
         Note: <input type="text" name="gradeValue">
         <br>
         <input type="submit" name="store" value="Ok">
+
+        <h1>Résultat</h1>
+        <?php if ($newGrade > 0) { // La note a pu être créée puisqu'on a reçu un id en retour ?>
+            <div>
+                <p>La note ajoutée a l'id: <?= $newGrade ?></p>
+            </div>
+        <?php } else { ?>
+            <div>
+                <p>Un problème est survenu</p>
+            </div>
+        <?php } ?>
+        <a href="/">Retour</a>
     </form>
 </div>
+
