@@ -24,7 +24,7 @@ $evals = selectMany("Select testDescription, moduleShortName from evaluation
 ?>
 
 <div>
-    <p>Note ajoutée: <?= $newGrade ?></p>
+    <p>Note ajoutée: <?=var_dump($newGrade)?></p>
 </div>
 <div>
     <form method="post">
