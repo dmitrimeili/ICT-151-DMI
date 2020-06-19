@@ -20,7 +20,7 @@ $profs = selectMany("select * from person where role=1", []);
     <p>Note ajoutée: <?= var_dump($newGrade) ?></p>
 </div>
 <div>
-    <form method="post" action="addGrade.php">
+    <form method="post" action="view/addGrade.php">
         Evaluation: <select name="idEval">
             <?php foreach ($evals as $eval) { ?>
                 <option value="<?= $eval['idEvaluation'] ?>"><?= $eval['testDescription'] ?>,
@@ -49,13 +49,29 @@ $profs = selectMany("select * from person where role=1", []);
 </div>
 <div>
     <p>Mauvaise Notes</p>
-    <form method="post" action="badGrade.php">
+    <form method="post" action="view/badGrade.php">
         Elève: <select name="idStudent">
             <?php foreach ($students as $student) { ?>
                 <option value="<?= $student['idPerson'] ?>"><?= $student['personFirstName'] ?> <?= $student['personLastName'] ?></option>
             <?php } ?>
         </select>
         <input type="submit" name="show" value="Ok">
+    </form>
+</div>
+<div>
+    <p>Notes par rapport a un prof</p>
+    <form method="post" action="view/teachersGrade.php">
+        Elève: <select name="idStudent">
+            <?php foreach ($students as $student) { ?>
+                <option value="<?= $student['idPerson'] ?>"><?= $student['personFirstName'] ?> <?= $student['personLastName'] ?></option>
+            <?php } ?>
+        </select>
+        Profs:<select name="idProf">
+            <?php foreach ($profs as $prof) { ?>
+                <option value="<?= $prof['idPerson'] ?>"><?= $prof['personFirstName'] ?><?= $prof['personLastName'] ?></option>
+            <?php } ?>
+        </select>
+        <input type="submit" name="teacherGrade" value="Ok">
     </form>
 </div>
 
